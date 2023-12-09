@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>daje</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        #countdown-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #countdown-title {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        #countdown {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            background-color: #333;
+            padding: 15px;
+            border-radius: 10px;
+            display: inline-block;
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        document.body.appendChild(canvas);
+        const stars = [];
+        function createStar() {
+            return {
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2,
+                speed: Math.random() * 0.5
+            };
+        }
+        for (let i = 0; i < 100; i++) {
+            stars.push(createStar());
+        }
+        function animateStars() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                context.fillStyle = '#fff';
+                context.beginPath();
+                context.arc(star.x, star.y, star.size, 0, 2 * Math.PI);
+                context.fill();
+                star.y += star.speed;
+                if (star.y > canvas.height) {
+                    star.y = 0;
+                }
+            });
+            requestAnimationFrame(animateStars);
+        }
+        animateStars();
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        const countdownContainer = document.createElement('div');
+        countdownContainer.id = 'countdown-container';
+        document.body.appendChild(countdownContainer);
+        const countdownTitle = document.createElement('div');
+        countdownTitle.id = 'countdown-title';
+        countdownTitle.textContent = 'Il ritorno del fazzo';
+        countdownContainer.appendChild(countdownTitle);
+        const countdownDiv = document.createElement('div');
+        countdownDiv.id = 'countdown';
+        countdownContainer.appendChild(countdownDiv);
+        function updateCountdown() {
+            const currentTime = new Date();
+            const targetDate = new Date(currentTime.getFullYear(), 11, 25); // December 25th
+            if (currentTime > targetDate) {
+                countdownDiv.innerHTML = 'Il fazzo e\' tornato!';
+            } else {
+                const timeDifference = targetDate - currentTime;
+                const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+                countdownDiv.innerHTML = `${days} : ${hours} : ${minutes} : ${seconds}`;
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
