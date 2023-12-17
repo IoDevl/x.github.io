@@ -93,7 +93,7 @@
         countdownContainer.appendChild(countdownDiv);
         function updateCountdown() {
             const currentTime = new Date();
-            const targetDate = new Date(currentTime.getFullYear(), 11, 25);
+            const targetDate = new Date(currentTime.getFullYear(), 11, 25, 11, 0, 0);
             if (currentTime > targetDate) {
                 countdownDiv.innerHTML = 'Il fazzo e\' tornato!';
             } else {
