@@ -86,16 +86,16 @@
         document.body.appendChild(countdownContainer);
         const countdownTitle = document.createElement('div');
         countdownTitle.id = 'countdown-title';
-        countdownTitle.textContent = 'Il ritorno del fazzo';
+        countdownTitle.textContent = 'Quel bastardo è tornato prima del previsto';
         countdownContainer.appendChild(countdownTitle);
         const countdownDiv = document.createElement('div');
         countdownDiv.id = 'countdown';
         countdownContainer.appendChild(countdownDiv);
         function updateCountdown() {
             const currentTime = new Date();
-            const targetDate = new Date(currentTime.getFullYear(), 11, 26, 11, 0, 0);
+            const targetDate = new Date(currentTime.getFullYear(), 2024, 1, 26, 11, 0, 0);
             if (currentTime > targetDate) {
-                countdownDiv.innerHTML = 'Il fazzo e\' tornato!';
+                countdownDiv.innerHTML = 'Sei veramente venuto a vedere cosa sarebbe successo alla fine del timer?';
             } else {
                 const timeDifference = targetDate - currentTime;
                 const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
