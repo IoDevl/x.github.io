@@ -86,30 +86,27 @@
         document.body.appendChild(countdownContainer);
         const countdownTitle = document.createElement('div');
         countdownTitle.id = 'countdown-title';
-        countdownTitle.textContent = 'Quel bastardo è tornato prima del previsto';
+        countdownTitle.textContent = 'Mancano a Natale:';
         countdownContainer.appendChild(countdownTitle);
         const countdownDiv = document.createElement('div');
         countdownDiv.id = 'countdown';
         countdownContainer.appendChild(countdownDiv);
         function updateCountdown() {
             const currentTime = new Date();
-            const targetDate = new Date(2024, 12, 25, 0, 0, 0); 
+            const targetDate = new Date(currentTime.getFullYear(), 11, 25, 0, 0, 0); // 25 dicembre 00:00
             if (currentTime > targetDate) {
-                countdownDiv.innerHTML = 'Sei veramente venuto a vedere cosa sarebbe successo alla fine del timer?';
+                countdownDiv.innerHTML = 'Buon Natale!';
             } else {
                 const timeDifference = targetDate - currentTime;
                 const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-                countdownDiv.innerHTML = `${days} : ${hours} : ${minutes} : ${seconds}`;
+                countdownDiv.innerHTML = `${days} giorni, ${hours} ore, ${minutes} minuti, ${seconds} secondi`;
             }
         }
         setInterval(updateCountdown, 1000);
         updateCountdown();
-    </script>
-</body>
-</html>
     </script>
 </body>
 </html>
